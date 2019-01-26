@@ -4,21 +4,23 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+
+	"github.com/terminatingcode/gilded-rose/item"
 )
 
 func main() {
 	fmt.Println("OMGHAI!")
 
-	var items = []*Item{
-		&Item{"+5 Dexterity Vest", 10, 20},
-		&Item{"Aged Brie", 2, 0},
-		&Item{"Elixir of the Mongoose", 5, 7},
-		&Item{"Sulfuras, Hand of Ragnaros", 0, 80},
-		&Item{"Sulfuras, Hand of Ragnaros", -1, 80},
-		&Item{"Backstage passes to a TAFKAL80ETC concert", 15, 20},
-		&Item{"Backstage passes to a TAFKAL80ETC concert", 10, 49},
-		&Item{"Backstage passes to a TAFKAL80ETC concert", 5, 49},
-		&Item{"Conjured Mana Cake", 3, 6}, // <-- :O
+	var items = []*item.Item{
+		item.New("+5 Dexterity Vest", 10, 20),
+		item.New("Aged Brie", 2, 0),
+		item.New("Elixir of the Mongoose", 5, 7),
+		item.New("Sulfuras, Hand of Ragnaros", 0, 80),
+		item.New("Sulfuras, Hand of Ragnaros", -1, 80),
+		item.New("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+		item.New("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+		item.New("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+		item.New("Conjured Mana Cake", 3, 6), // <-- :O
 	}
 
 	days := 2
@@ -39,7 +41,7 @@ func main() {
 			fmt.Println(items[i])
 		}
 		fmt.Println("")
-		err := UpdateQuality(items)
+		err := item.UpdateQuality(items)
 		if err != nil {
 			fmt.Printf("Error on day %d: %s\n", day, err)
 		}

@@ -1,4 +1,4 @@
-package main_test
+package item_test
 
 import (
 	"testing"
