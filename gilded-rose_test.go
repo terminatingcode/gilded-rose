@@ -132,4 +132,28 @@ var _ = Describe("UpdateQuality", func() {
 			Expect(item.quality).To(Equal(0))
 		})
 	})
+
+	Describe("given a conjured item", func() {
+		It("degrades in quality by 2", func() {
+			item := Item{
+				name:    "Conjured item",
+				sellIn:  1,
+				quality: 2,
+			}
+			err := UpdateQuality([]*Item{&item})
+			Expect(err).NotTo(HaveOccurred())
+			Expect(item.quality).To(Equal(0))
+		})
+
+		It("degrades to 0 even if odd number", func() {
+			item := Item{
+				name:    "Conjured item",
+				sellIn:  1,
+				quality: 1,
+			}
+			err := UpdateQuality([]*Item{&item})
+			Expect(err).NotTo(HaveOccurred())
+			Expect(item.quality).To(Equal(0))
+		})
+	})
 })

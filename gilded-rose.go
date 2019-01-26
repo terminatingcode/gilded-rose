@@ -1,5 +1,9 @@
 package main
 
+import (
+	"strings"
+)
+
 // if sellIn 0, quality -x2
 // quality never <0
 // aged brie increases in quality as time passes
@@ -17,7 +21,9 @@ func UpdateQuality(items []*Item) error {
 
 		if items[i].name != "Aged Brie" && items[i].name != "Backstage passes to a TAFKAL80ETC concert" {
 			if items[i].quality > 0 {
-				if items[i].name != "Sulfuras, Hand of Ragnaros" {
+				if strings.HasPrefix(items[i].name, "Conjured") && items[i].quality > 1 {
+					items[i].quality = items[i].quality - 2
+				} else if items[i].name != "Sulfuras, Hand of Ragnaros" {
 					items[i].quality = items[i].quality - 1
 				}
 			}
