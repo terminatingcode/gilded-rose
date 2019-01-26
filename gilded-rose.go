@@ -1,11 +1,18 @@
 package main
 
+// if sellIn 0, quality -x2
+// quality never <0
+// aged brie increases in quality as time passes
+// max quality 50
+// sulfuras no sellIn or degradein quality
+// backstage passes: if sellIn <=10 +2, if sellIn <=5 +3, if sellIn==0 0
 type Item struct {
-	name            string
-	sellIn, quality int
+	name    string
+	sellIn  int
+	quality int
 }
 
-func UpdateQuality(items []*Item) {
+func UpdateQuality(items []*Item) error {
 	for i := 0; i < len(items); i++ {
 
 		if items[i].name != "Aged Brie" && items[i].name != "Backstage passes to a TAFKAL80ETC concert" {
@@ -54,5 +61,5 @@ func UpdateQuality(items []*Item) {
 			}
 		}
 	}
-
+	return nil
 }

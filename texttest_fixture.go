@@ -39,6 +39,9 @@ func main() {
 			fmt.Println(items[i])
 		}
 		fmt.Println("")
-		UpdateQuality(items)
+		err := UpdateQuality(items)
+		if err != nil {
+			fmt.Printf("Error on day %d: %s\n", day, err)
+		}
 	}
 }
