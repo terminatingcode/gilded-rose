@@ -5,23 +5,26 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/terminatingcode/gilded-rose/item"
+	p "github.com/terminatingcode/gilded-rose/product"
+	s "github.com/terminatingcode/gilded-rose/store"
 )
 
 func main() {
 	fmt.Println("OMGHAI!")
 
-	var items = []*item.Item{
-		item.New("+5 Dexterity Vest", 10, 20),
-		item.New("Aged Brie", 2, 0),
-		item.New("Elixir of the Mongoose", 5, 7),
-		item.New("Sulfuras, Hand of Ragnaros", 0, 80),
-		item.New("Sulfuras, Hand of Ragnaros", -1, 80),
-		item.New("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-		item.New("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-		item.New("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-		item.New("Conjured Mana Cake", 3, 6), // <-- :O
+	var products = []p.Product{
+		p.NewProductFactory("+5 Dexterity Vest", 10, 20),
+		p.NewProductFactory("Aged Brie", 2, 0),
+		p.NewProductFactory("Elixir of the Mongoose", 5, 7),
+		p.NewProductFactory("Sulfuras, Hand of Ragnaros", 0, 80),
+		p.NewProductFactory("Sulfuras, Hand of Ragnaros", -1, 80),
+		p.NewProductFactory("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+		p.NewProductFactory("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+		p.NewProductFactory("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+		p.NewProductFactory("Conjured Mana Cake", 3, 6), // <-- :O
 	}
+
+	store := s.Store{products}
 
 	days := 2
 	var err error
@@ -34,16 +37,8 @@ func main() {
 		days++
 	}
 
-	for day := 0; day < days; day++ {
-		fmt.Printf("-------- day %d --------\n", day)
-		fmt.Println("name, sellIn, quality")
-		for i := 0; i < len(items); i++ {
-			fmt.Println(items[i])
-		}
-		fmt.Println("")
-		err := item.UpdateQuality(items)
-		if err != nil {
-			fmt.Printf("Error on day %d: %s\n", day, err)
-		}
+	err = store.UpdateInventory(days)
+	if err != nil {
+		fmt.Printf("Error updating inventory: %s\n", err)
 	}
 }
