@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestGildedRose(t *testing.T) {
+func TestItem(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "GildedRose Suite")
+	RunSpecs(t, "Item Suite")
 }
